@@ -20,6 +20,7 @@ class App extends React.Component {
     render(){
         return(
             <div>
+                
                 <h3>List of Friends</h3>
                 {this.friends.map((friend) => <Item name={friend.name} contact={friend.contact} address={friend.address}/>)}
             </div>
