@@ -1,40 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import'./TodoApp.css';
 import 'materialize-css/dist/css/materialize.min.css';
 import Navbar from './Navbar';
-import TodoList from './TodoList';
-import AddForm from './AddForm';
+import { BrowserRouter, Route } from 'react-router-dom';
+import Home from '../pages/Home';
+import About from '../pages/About';
+import Contact from '../pages/Contact';
+import TodoDetails from '../pages/TodoDetails';
 
-class TodoApp extends Component {
-  state ={
-    todos: [
-      {id:1,content:"Learn react js"},
-      {id:2,content:"watch Movie"}
-    ]
-  }
-  addTodo=(todo) =>{
-    const todos =[...this.state.todos,todo];//spread operator...
-    this.setState({todos});
-  }
-  deleteTodo =(id) =>{
-    const todos =this.state.todos.filter(todo => todo.id != id);
-    this.setState({todos});
-  }
-  render() {
-    const {todos}= this.state;//destructuring  objects
-    return (
+const TodoApp = (props) => {
+  return (
+    <BrowserRouter>
       <div className="App">
-      <Navbar/>
-      <div className="container">
-      <TodoList deleteTodo={this.deleteTodo} todos={todos}/>
-      
-      <AddForm addTodo={this.addTodo}/>
-      
-
+        <Navbar />
+        <Route path="/" exact component={Home} />
+        <Route path="/about" component={About} />
+        <Route path="/contact" component={Contact} />
+        <Route path="/todo/:id" component={TodoDetails} />
       </div>
-      </div>
-    );
-  }
+    </BrowserRouter> 
+  );
 }
 
 export default TodoApp;
